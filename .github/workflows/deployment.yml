@@ -12,13 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          cd deploy-sample
           yarn
           yarn build
 
       - uses: shinyinc/action-aws-cli@v1.2
       - run: |
-          cd deploy-sample
           aws s3 sync build s3://${{ secrets.AWS_S3_BUCKET_NAME }}/
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
